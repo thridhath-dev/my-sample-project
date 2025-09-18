@@ -11,7 +11,7 @@ return (
 <nav style={{ display: 'flex', gap: 12, marginBottom: 20 }}>
 <Link href="/sign-in">Sign in</Link>
 <Link href="/sign-up">Sign up</Link>
-<Link href="/profile">Profile (protected)</Link>
+<Link href="/profile">Profile (protected) by thridath</Link>
 </nav>
 
 
