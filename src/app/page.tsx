@@ -1,17 +1,17 @@
 import Link from 'next/link';
 import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
+import Sidebar from './components/sidebar/page';
 
 
 export default function Home() {
 return (
 <main>
-<h1>Next.js + Clerk (TypeScript) demo</h1>
 
+<h1 >Wigoh</h1>
 
-<nav style={{ display: 'flex', gap: 12, marginBottom: 20 }}>
+<nav className='thri'>
 <Link href="/sign-in">Sign in</Link>
 <Link href="/sign-up">Sign up</Link>
-<Link href="/profile">Profile (protected) by thridath</Link>
 </nav>
 
 
@@ -19,6 +19,7 @@ return (
 <p>You are signed in. <UserButton /></p>
 </SignedIn>
 
+<Sidebar/>
 
 <SignedOut>
 <p>You are signed out.</p>

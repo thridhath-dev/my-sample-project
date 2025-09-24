@@ -24,3 +24,35 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+.thri {
+  display: flex;
+  justify-content: end;
+  padding: 10px 20px;
+  gap: 10px;
+}
+
+.thri a:nth-child(1) {
+  border: 1px solid yellow;
+  padding: 10px;
+  border-radius: 40px;
+  background-color: rgba(248, 206, 152, 0.384);
+}
+
+.thri a:nth-child(1):hover {
+  background-color: blueviolet;
+  color: white;
+}
+
+.thri a:nth-child(2) {
+  border: 1px solid yellow;
+  padding: 10px;
+  border-radius: 40px;
+  background-color: rgba(248, 206, 152, 0.384);
+}
+
+.thri a:nth-child(2):hover {
+  background-color: blueviolet;
+  color: white;
+}

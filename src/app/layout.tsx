@@ -3,7 +3,8 @@
 
 import React, { ReactNode } from 'react';
 import { ClerkProvider } from '@clerk/nextjs';
-
+import "./globals.css"
+import Sidebar from "./components/sidebar/page";
 
 interface Props {
 children: ReactNode;
@@ -18,7 +19,9 @@ return (
 <html lang="en">
 <head />
 <body>
+    <Sidebar/>
 <ClerkProvider publishableKey={publishableKey}>
+    
 <div style={{ padding: 20, fontFamily: 'system-ui, sans-serif' }}>
 {children}
 </div>

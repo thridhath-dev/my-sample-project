@@ -1,0 +1,110 @@
+
+
+:root{
+  --bg:#ffffff;
+  --muted:#64748b;
+  --accent:#5b21b6; /* violet */
+  --border:#e6e7ea;
+  --panel:#f8fafc;
+}
+
+/* Sidebar layout */
+.sidebar{
+  width: 280px;
+  min-height: 100vh;
+  background: var(--bg);
+  border-right: 1px solid var(--border);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  gap: 16px;
+  box-sizing: border-box;
+}
+
+/* Brand */
+.brand h2{ margin:0; font-size:1.1rem; }
+.brand small{ color:var(--muted); }
+
+/* Menu links */
+.menu{ display:flex; flex-direction:column; gap:6px; margin-top:10px; }
+.menu-link{
+  display:block;
+  padding:8px 10px;
+  border-radius:8px;
+  color:#0f172a;
+  text-decoration:none;
+  font-size:0.95rem;
+  transition: background-color .18s ease, color .18s ease, transform .08s ease;
+}
+.menu-link:hover{ background:#f1f5f9; transform: translateY(-1px); }
+
+/* Transaction form */
+.txn-form h3{ margin:0 0 8px 0; font-size:1rem; }
+.txn-form .row{ display:flex; gap:8px; }
+.txn-form select,
+.txn-form input[type="text"],
+.txn-form input[type="date"]{
+  width:100%;
+  padding:10px 12px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  font-size:0.95rem;
+  box-sizing:border-box;
+  transition: border-color .16s ease, box-shadow .12s ease;
+}
+.txn-form select:focus,
+.txn-form input:focus{ outline:none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(91,33,182,0.07); }
+
+.txn-form .actions{ display:flex; gap:8px; margin-top:10px; align-items:center; }
+
+/* Buttons (outline + primary) */
+.btn{
+  padding:8px 12px;
+  border-radius:8px;
+  border:2px solid #0f172a;
+  background: transparent;
+  color:#0f172a;
+  cursor:pointer;
+  font-weight:600;
+  transition: background-color .18s ease, color .18s ease, transform .08s ease;
+}
+.btn:hover{ transform: translateY(-2px); }
+
+/* Primary (filled) */
+.btn.primary{
+  background:#0f172a;
+  color:white;
+  border-color:#0f172a;
+}
+.btn.primary:hover{ background:#111827; }
+
+/* Outline button style */
+.btn.outline{
+  background:white;
+  color:#0f172a;
+}
+
+/* Small button for remove */
+.btn.small{ padding:6px 8px; font-size:0.8rem; border-radius:6px; }
+
+/* Categories list */
+.categories h3{ margin:0 0 8px 0; }
+.categories ul{ list-style:none; padding:0; margin:0 0 8px 0; max-height:180px; overflow:auto; display:flex; flex-direction:column; gap:6px; }
+.cat-item{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:8px; background: var(--panel); border-radius:8px; font-size:0.95rem;
+}
+
+/* add category area */
+.add-cat{ display:flex; gap:8px; margin-top:6px; }
+.add-cat input{ flex:1; }
+
+/* Footer */
+.sidebar-footer{ margin-top:auto; font-size:0.8rem; color:var(--muted); }
+
+/* Responsive: hide sidebar on small screens; you can add a toggle to open it */
+@media (max-width: 768px){
+  .sidebar{ position:fixed; left:0; top:0; bottom:0; width: 80%; max-width:320px; transform: translateX(-110%); transition: transform .25s ease; z-index:50; }
+  .sidebar.open{ transform: translateX(0); }
+}
