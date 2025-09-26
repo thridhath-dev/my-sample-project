@@ -1,7 +1,7 @@
 // components/sidebar/page.tsx
 "use client";
 
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   HomeIcon,
   ChartBarIcon,
@@ -14,10 +14,12 @@ import AlertsPage from "../alerts/AlertsPage";
 import HomePage from "../home/HomePage";
 import CategoriesPage from "../categories/CategoriesPage";
 import TransactionsPage from "../transactions/TransactionsPage";
+import DashboardPage from "../dashboard/DashboardPage";
 
 
 export default function Sidebar() {
   const [activeTab, setActiveTab] = useState("/");
+  const [isOpen, setIsOpen] = useState(false);
 
   const nav = [
     { href: "/", label: "Home", icon: HomeIcon },
@@ -27,16 +29,34 @@ export default function Sidebar() {
     { href: "/alerts", label: "Alerts", icon: BellAlertIcon, badge: 5 },
   ];
 
+  // restore last active tab from localStorage
+  useEffect(() => {
+    try {
+      const stored = window.localStorage.getItem("activeTab");
+      if (stored) setActiveTab(stored);
+    } catch {}
+  }, []);
+
+  // persist active tab
+  useEffect(() => {
+    try {
+      window.localStorage.setItem("activeTab", activeTab);
+    } catch {}
+  }, [activeTab]);
+
+  const activeLabel = useMemo(() => nav.find(n => n.href === activeTab)?.label ?? "Home", [activeTab]);
+
   const handleTabClick = (href: string) => {
     setActiveTab(href);
+    setIsOpen(false);
   };
 
   const renderContent = () => {
     switch (activeTab) {
       case "/":
         return <HomePage />;
-      // case "/dashboard":
-      //   return <DashboardPage />;
+      case "/dashboard":
+        return <DashboardPage />;
       case "/transactions":
         return <TransactionsPage />;
       case "/categories":
@@ -49,9 +69,9 @@ export default function Sidebar() {
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-900">
+    <div className="sidebar-shell relative">
       {/* Sidebar */}
-      <aside className="sidebar w-60 bg-black/90 min-h-screen flex flex-col text-white">
+      <aside className={`sidebar w-60 bg-black/90 min-h-screen flex flex-col text-white ${isOpen ? "open" : ""}`} aria-expanded={isOpen}>
         {/* Title */}
         <div className="px-4 pt-6 pb-2">
           <h2 className="finance">Finance Tracker</h2>
@@ -127,9 +147,27 @@ export default function Sidebar() {
         </div>
       </aside>
 
+      {/* Mobile overlay */}
+      {isOpen ? (
+        <button className="overlay md:hidden" onClick={() => setIsOpen(false)} aria-label="Close sidebar" />
+      ) : null}
+
       {/* Main Content Area */}
-      <main className="flex-1 bg-gray-900 text-white overflow-auto">
-        {renderContent()}
+      <main className="bg-gray-900 text-white overflow-auto">
+        {/* Topbar (mobile) */}
+        <div className="topbar md:hidden">
+          <button className="topbar-btn" aria-label="Open sidebar" onClick={() => setIsOpen(true)}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            </svg>
+          </button>
+          <div className="topbar-title">{activeLabel}</div>
+          <div className="topbar-spacer" />
+        </div>
+
+        <div className="p-6">
+          {renderContent()}
+        </div>
       </main>
     </div>
   );

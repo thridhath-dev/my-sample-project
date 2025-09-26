@@ -7,6 +7,14 @@
   --panel:#0f1724;
 }
 
+/* Shell wrapper ensures sidebar and content are side-by-side */
+.sidebar-shell{
+  display: flex;
+  min-height: 100vh;
+  background: #111827; /* matches bg-gray-900 */
+}
+.sidebar-shell main{ flex: 1 1 auto; }
+
 /* --- Sidebar layout --- */
 .sidebar{
   width: 280px;
@@ -200,3 +208,39 @@
   display:none;
 }
 .sidebar.compact .icon-wrap{ width:44px; height:44px; margin: 6px auto; }
+
+/* Overlay for mobile when sidebar open */
+.overlay{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 40;
+}
+
+/* Simple topbar for mobile */
+.topbar{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  position: sticky;
+  top: 0;
+  background: linear-gradient(180deg, rgba(10,10,10,0.85), rgba(10,10,10,0.6));
+  backdrop-filter: blur(8px);
+  z-index: 10;
+}
+.topbar-btn{
+  width: 36px;
+  height: 36px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  color: #e6eef8;
+}
+.topbar-title{
+  font-weight: 700;
+}
+.topbar-spacer{ width: 36px; height: 36px; }

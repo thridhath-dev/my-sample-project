@@ -6,27 +6,27 @@ import './globals.css';
 export default function Home() {
 return (
     <>
-<main>
+<div className="app-shell">
+  <header className="app-header">
+    <div className="brand">Wigoh</div>
+    <div className="header-right">
+      <nav className='thri'>
+        <Link href="/sign-in">Sign in</Link>
+        <Link href="/sign-up">Sign up</Link>
+      </nav>
+      <div className="auth-state">
+        <SignedIn>
+          <span className="signed">You are signed in.</span> <UserButton />
+        </SignedIn>
+        <SignedOut>
+          <span className="signed-out">You are signed out.</span>
+        </SignedOut>
+      </div>
+    </div>
+  </header>
 
-<h1 ><strong><b>Wigoh</b></strong></h1>
-
-<nav className='thri'>
-<Link href="/sign-in">Sign in</Link>
-<Link href="/sign-up">Sign up</Link>
-</nav>
-
-
-<SignedIn>
-<p className="pop-up">You are signed in. <UserButton /></p>
-</SignedIn>
-
-<Sidebar/>
-
-<SignedOut>
-
-<p>You are signed out.</p>
-</SignedOut>
-</main>
-</>
+  <Sidebar/>
+</div>
+    </>
 );
 }
